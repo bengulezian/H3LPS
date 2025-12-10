@@ -4,19 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>H3LPS</title>
+
   <style>
-    /* --- CSS Variables & Reset --- */
     :root {
-      /* The exact color from your image */
-      --brand: #999c8b; 
-      
-      /* A dark, professional matte background to make the brand color pop */
-      --bg: 999c8b;
-      --card-bg: #141414;
-      --text-main: #f1f1f1;
-      --text-muted: #999c8b; /* Using brand color for muted text for monochromatic look */
-      
-      --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+      --brand: #b8ccc4;          /* Main color theme */
+      --bg: #eef5f3;             /* Very light background */
+      --card-bg: #ffffff;        /* White cards */
+      --text-main: #2a2a2a;      /* Soft dark gray for readability (not black) */
+      --text-muted: #6b6b6b;
+      --font-main: 'Inter', system-ui, sans-serif;
     }
 
     * { box-sizing: border-box; }
@@ -25,8 +21,6 @@
       margin: 0;
       font-family: var(--font-main);
       background-color: var(--bg);
-      /* Subtle radial gradient using the brand color */
-      background-image: radial-gradient(circle at 50% 0%, rgba(153, 156, 139, 0.15), transparent 60%);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -35,162 +29,153 @@
       padding: 40px 20px;
     }
 
-    /* --- Typography & Layout --- */
     .container {
       width: 100%;
-      max-width: 800px;
+      max-width: 900px;
       text-align: center;
     }
 
-    /* --- Header Section --- */
+    /* ---- HEADER ---- */
     header {
-      margin-bottom: 60px;
+      margin-bottom: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .logo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 160px;
+      margin-bottom: 20px;
+    }
+
+    .logo-text {
+      width: 260px;
+      margin-top: 10px;
     }
 
     h1 {
-      margin: 0;
-      font-size: 4rem; /* Large Title */
-      font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1;
-      background: linear-gradient(180deg, #fff, var(--brand));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      display: none; /* Using your logo text instead */
     }
 
     .subtitle {
       margin-top: 12px;
-      color: var(--brand);
-      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-size: 1rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 500;
-      opacity: 0.8;
     }
 
-    /* --- Description Section --- */
+    /* ---- DESCRIPTION ---- */
     .description-box {
-      margin: 0 auto 60px;
+      margin: 0 auto 50px;
       text-align: center;
-      max-width: 600px;
+      max-width: 650px;
       line-height: 1.6;
       font-size: 1.1rem;
-      color: #ccc;
-      padding: 0 10px;
+      color: var(--text-main);
     }
 
-    /* --- Team Section --- */
+    /* ---- TEAM SECTION ---- */
     .team-section {
       text-align: left;
+      margin-bottom: 60px;
     }
 
     .section-title {
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: var(--brand);
-      margin-bottom: 24px;
-      border-bottom: 1px solid rgba(153, 156, 139, 0.2);
-      padding-bottom: 10px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--brand);
+      padding-bottom: 6px;
       display: inline-block;
     }
 
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      gap: 20px;
     }
 
     .member-card {
       background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-left: 2px solid var(--brand); /* Brand accent */
-      border-radius: 4px;
+      border: 2px solid var(--brand);
+      border-radius: 12px;
       padding: 20px;
-      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .member-card:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.03);
+      transform: translateY(-4px);
+      box-shadow: 0px 6px 14px rgba(0,0,0,0.08);
     }
 
     .avatar-placeholder {
-      width: 40px;
-      height: 40px;
-      background: rgba(153, 156, 139, 0.1);
-      color: var(--brand);
-      border-radius: 4px;
+      width: 48px;
+      height: 48px;
+      background: var(--brand);
+      color: #fff;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 1rem;
       margin-bottom: 12px;
     }
 
     .member-name {
       font-weight: 600;
-      font-size: 1.1rem;
-      color: #fff;
+      font-size: 1.2rem;
       margin-bottom: 4px;
     }
 
     .member-role {
-      font-size: 0.85rem;
-      color: #888;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
-    /* --- Footer --- */
     footer {
-      margin-top: 80px;
+      margin-top: 60px;
       font-size: 0.75rem;
-      color: #444;
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 3rem; }
       .container { padding: 0 10px; }
     }
   </style>
 </head>
+
 <body>
 
   <div class="container">
-    
+
     <header>
-        <img src="h3lpslogo.JPG" alt="H3LPS Logo" class="logo-img" />
-      </div>
-      
-      <h1>H3LPS</h1>
+      <img src="h3lpslogo.PNG" alt="H3LPS Logo Symbol" class="logo-img">
+      <img src="h3lpstext.PNG" alt="H3LPS Company Name" class="logo-text">
       <div class="subtitle">Company</div>
     </header>
 
     <main>
       <div class="description-box">
         <p>
-          [Insert Description Here] <br>
-          We provide innovative engineering solutions. Replace this text with your company mission statement, 
+          [Insert Description Here] <br><br>
+          We provide innovative engineering solutions. Replace this text with your company mission statement,
           value proposition, or a brief introduction to your services.
         </p>
       </div>
 
       <div class="team-section">
         <div class="section-title">Our Team</div>
-        
+
         <div class="team-grid">
-          
+
           <div class="member-card">
             <div class="avatar-placeholder">BG</div>
             <div class="member-name">Ben Gulezian</div>
@@ -214,7 +199,7 @@
     </main>
 
     <footer>
-      &copy; 2024 H3LPS. All Rights Reserved.
+      &copy; 2025 H3LPS. All Rights Reserved.
     </footer>
 
   </div>
