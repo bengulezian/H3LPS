@@ -7,10 +7,10 @@
 
   <style>
     :root {
-      --brand: #b8ccc4;          /* Main color theme */
-      --bg: #cbdcd7;             /* Very light background */
-      --card-bg: #ffffff;        /* White cards */
-      --text-main: #2a2a2a;      /* Soft dark gray for readability (not black) */
+      --brand: #b8ccc4;
+      --bg: #d9e6e2; /* Slightly darker background */
+      --card-bg: #ffffff;
+      --text-main: #2a2a2a;
       --text-muted: #6b6b6b;
       --font-main: 'Inter', system-ui, sans-serif;
     }
@@ -35,9 +35,8 @@
       text-align: center;
     }
 
-    /* ---- HEADER ---- */
     header {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -45,26 +44,10 @@
 
     .logo-img {
       width: 160px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
-    .logo-text {
-      width: 260px;
-      margin-top: 10px;
-    }
-
-    h1 {
-      display: none; /* Using your logo text instead */
-    }
-
-    .subtitle {
-      margin-top: 12px;
-      color: var(--text-muted);
-      font-size: 1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
+    /* Removed subtitle "Company" */
 
     /* ---- DESCRIPTION ---- */
     .description-box {
@@ -73,7 +56,6 @@
       max-width: 650px;
       line-height: 1.6;
       font-size: 1.1rem;
-      color: var(--text-main);
     }
 
     /* ---- TEAM SECTION ---- */
@@ -83,19 +65,20 @@
     }
 
     .section-title {
-      font-size: 0.9rem;
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: var(--text-muted);
+      color: #ffffff;
       margin-bottom: 20px;
       border-bottom: 2px solid var(--brand);
       padding-bottom: 6px;
+      font-weight: 700;
       display: inline-block;
     }
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
     }
 
@@ -106,6 +89,7 @@
       padding: 20px;
       box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
     }
 
     .member-card:hover {
@@ -113,29 +97,26 @@
       box-shadow: 0px 6px 14px rgba(0,0,0,0.08);
     }
 
-    .avatar-placeholder {
-      width: 48px;
-      height: 48px;
-      background: var(--brand);
-      color: #fff;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 12px;
-    }
-
     .member-name {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1.2rem;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .member-role {
       font-size: 0.9rem;
       color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .member-link a {
+      color: var(--brand);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .member-link a:hover {
+      text-decoration: underline;
     }
 
     footer {
@@ -146,9 +127,6 @@
       letter-spacing: 1px;
     }
 
-    @media (max-width: 600px) {
-      .container { padding: 0 10px; }
-    }
   </style>
 </head>
 
@@ -159,15 +137,13 @@
     <header>
       <img src="h3lpslogo.PNG" alt="H3LPS Logo Symbol" class="logo-img">
       <img src="h3lpstext.PNG" alt="H3LPS Company Name" class="logo-text">
-      <div class="subtitle">Company</div>
     </header>
 
     <main>
       <div class="description-box">
         <p>
-          [Insert Description Here] <br><br>
-          We provide innovative engineering solutions. Replace this text with your company mission statement,
-          value proposition, or a brief introduction to your services.
+          A Rhode Island-based tech business aiding caregivers with their everyday struggles.<br><br>
+          Tech for any sort of needs from a skilled team of engineers.
         </p>
       </div>
 
@@ -177,21 +153,21 @@
         <div class="team-grid">
 
           <div class="member-card">
-            <div class="avatar-placeholder">BG</div>
             <div class="member-name">Ben Gulezian</div>
             <div class="member-role">Founder | Electrical Engineer</div>
+            <div class="member-link"><a href="https://www.linkedin.com/in/bengulezian/" target="_blank">LinkedIn</a></div>
           </div>
 
           <div class="member-card">
-            <div class="avatar-placeholder">DF</div>
             <div class="member-name">Dario Finocchiaro</div>
             <div class="member-role">Software Engineer</div>
+            <div class="member-link"><a href="https://github.com/Dariop8/Robotics-2-project-Dynamic-identification-of-a-robot-with-visco-elastic-joints" target="_blank">Project Link</a></div>
           </div>
 
           <div class="member-card">
-            <div class="avatar-placeholder">MG</div>
             <div class="member-name">Maxwell Gleadow</div>
             <div class="member-role">Electrical Engineer</div>
+            <div class="member-link"><a href="https://www.linkedin.com/in/maxwell-gleadow/" target="_blank">LinkedIn</a></div>
           </div>
 
         </div>
