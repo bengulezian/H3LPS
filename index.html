@@ -5,44 +5,234 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>H3LPS</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#7dd3fc;--muted:#94a3b8}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial; background:linear-gradient(180deg,#071025 0%, #071025 60%, #071030 100%);color:#e6eef8;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
-    .wrap{width:100%;max-width:920px}
-    header{display:flex;align-items:center;gap:18px}
-    .logo-img{width:84px;height:84px;flex:0 0 84px;border-radius:12px;object-fit:contain;background:#0b1220}
-    h1{margin:0;font-size:28px;letter-spacing:1px}
-    .card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px;margin-top:18px}
-    .placeholder{width:100%;height:260px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(90deg,#0b1220,#071025);border:1px dashed rgba(255,255,255,0.03);}
-    .names{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
-    .names li{padding:10px 12px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));border-radius:8px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;gap:12px}
-    .avatar{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#1e293b,#0b1220);display:inline-grid;place-items:center;font-weight:600;color:var(--accent)}
-    footer{margin-top:14px;color:var(--muted);font-size:13px}
-    @media (max-width:540px){header{flex-direction:column;align-items:flex-start}.logo-img{width:64px;height:64px}}
+    /* --- CSS Variables & Reset --- */
+    :root {
+      /* The exact color from your image */
+      --brand: #999c8b; 
+      
+      /* A dark, professional matte background to make the brand color pop */
+      --bg: #0d0d0d;
+      --card-bg: #141414;
+      --text-main: #f1f1f1;
+      --text-muted: #999c8b; /* Using brand color for muted text for monochromatic look */
+      
+      --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      /* Subtle radial gradient using the brand color */
+      background-image: radial-gradient(circle at 50% 0%, rgba(153, 156, 139, 0.15), transparent 60%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* --- Typography & Layout --- */
+    .container {
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    /* --- Header Section --- */
+    header {
+      margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-container {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid rgba(153, 156, 139, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 0 30px rgba(153, 156, 139, 0.1);
+      overflow: hidden;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 4rem; /* Large Title */
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1;
+      background: linear-gradient(180deg, #fff, var(--brand));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      color: var(--brand);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    /* --- Description Section --- */
+    .description-box {
+      margin: 0 auto 60px;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      color: #ccc;
+      padding: 0 10px;
+    }
+
+    /* --- Team Section --- */
+    .team-section {
+      text-align: left;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--brand);
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(153, 156, 139, 0.2);
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .member-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-left: 2px solid var(--brand); /* Brand accent */
+      border-radius: 4px;
+      padding: 20px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .avatar-placeholder {
+      width: 40px;
+      height: 40px;
+      background: rgba(153, 156, 139, 0.1);
+      color: var(--brand);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .member-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .member-role {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 80px;
+      font-size: 0.75rem;
+      color: #444;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 3rem; }
+      .container { padding: 0 10px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
+
+  <div class="container">
+    
     <header>
-      <img src="h3lplogo.jpg" alt="H3LPS logo" class="logo-img" />
-      <div>
-        <h1>H3LPS</h1>
-        <div style="color:var(--muted);font-size:14px">Company — placeholder one-page site</div>
+      <div class="logo-container">
+        <img src="h3lplogo.jpg" alt="H3LPS Logo" class="logo-img" />
       </div>
+      
+      <h1>H3LPS</h1>
+      <div class="subtitle">Company</div>
     </header>
 
-    <div class="card">
-      <div class="placeholder" role="img" aria-label="Placeholder image for H3LPS"></div>
+    <main>
+      <div class="description-box">
+        <p>
+          [Insert Description Here] <br>
+          We provide innovative engineering solutions. Replace this text with your company mission statement, 
+          value proposition, or a brief introduction to your services.
+        </p>
+      </div>
 
-      <h3 style="margin:18px 0 8px">Team</h3>
-      <ul class="names">
-        <li><div class="avatar">BG</div><div>Ben Gulezian — Founder | Electrical Engineer</div></li>
-        <li><div class="avatar">DF</div><div>Dario Finocchiaro — Software Engineer</div></li>
-        <li><div class="avatar">MG</div><div>Maxwell Gleadow — Electrical Engineer</div></li>
-      </ul>
+      <div class="team-section">
+        <div class="section-title">Our Team</div>
+        
+        <div class="team-grid">
+          
+          <div class="member-card">
+            <div class="avatar-placeholder">BG</div>
+            <div class="member-name">Ben Gulezian</div>
+            <div class="member-role">Founder | Electrical Engineer</div>
+          </div>
 
-      <footer>You can edit this file to change the placeholder image, names, or theme.</footer>
-    </div>
+          <div class="member-card">
+            <div class="avatar-placeholder">DF</div>
+            <div class="member-name">Dario Finocchiaro</div>
+            <div class="member-role">Software Engineer</div>
+          </div>
+
+          <div class="member-card">
+            <div class="avatar-placeholder">MG</div>
+            <div class="member-name">Maxwell Gleadow</div>
+            <div class="member-role">Electrical Engineer</div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      &copy; 2024 H3LPS. All Rights Reserved.
+    </footer>
+
   </div>
+
 </body>
 </html>
