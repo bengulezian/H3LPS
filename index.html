@@ -139,21 +139,27 @@
       position: relative;
       overflow: hidden;
       border-radius: 12px;
+      /* Ensures the carousel container itself handles touch actions better */
+      touch-action: pan-y; 
     }
 
     .carousel-track {
       display: flex;
-      transition: transform 0.4s ease;
+      transition: transform 0.4s ease-in-out;
+      width: 100%;
     }
 
+    /* FIX: Added flex properties to prevent squishing/distortion */
     .carousel img,
     .carousel video {
       width: 100%;
-      flex-shrink: 0;
+      /* Critical: prevents the flex container from shrinking images to fit one line */
+      flex: 0 0 100%; 
       display: block;
       border-radius: 10px;
+      object-fit: cover; /* Ensures images fill space without skewing */
+      max-height: 400px; /* Optional: keeps carousel height consistent */
     }
-
 
     .carousel-dots {
       display: flex;
@@ -169,6 +175,7 @@
       border: none;
       background: #cfcfcf;
       cursor: pointer;
+      padding: 0;
     }
 
     .carousel-dots button.active {
@@ -214,13 +221,11 @@
         </p>
       </div>
 
-      <!-- WHAT WE OFFER -->
       <div style="margin-bottom:60px; text-align:center;">
         <div class="section-title">What We Offer</div>
         <div style="font-size:1.1rem; color:var(--text-muted);">Coming Soon</div>
       </div>
 
-      <!-- OUR TEAM -->
       <div class="team-section">
         <div class="section-title">Our Team</div>
 
@@ -253,13 +258,11 @@
         </div>
       </div>
 
-      <!-- TESTIMONIALS -->
       <div style="margin-top:60px; text-align:center;">
         <div class="section-title">Testimonials</div>
         <div style="font-size:1.1rem; color:var(--text-muted);">Coming Soon</div>
       </div>
 
-      <!-- OUR WORK -->
       <div style="margin-top:60px; text-align:center;">
         <div class="section-title">Our Work</div>
 
@@ -272,16 +275,17 @@
               <img src="doorsens3.png" alt="Door Sensor Image 3">
               <video
                 src="doorsensexpl.mp4"
-                autoplay
                 loop
                 muted
                 playsinline
               ></video>
+              <img src="doorsens4.png" alt="Door Sensor Image 4">
             </div>
           </div>
 
           <div class="carousel-dots" id="doorDots">
             <button class="active"></button>
+            <button></button>
             <button></button>
             <button></button>
             <button></button>
@@ -296,7 +300,6 @@
         </div>
       </div>
 
-      <!-- CONTACT -->
       <div style="margin-top:60px; text-align:center;">
         <div class="section-title">Contact Us</div>
         <div style="font-size:1.1rem; color:var(--text-main);">
@@ -317,22 +320,21 @@
     let index = 0;
 
     function updateCarousel() {
-  track.style.transform = `translateX(-${index * 100}%)`;
+      track.style.transform = `translateX(-${index * 100}%)`;
 
-  dots.forEach((dot, i) =>
-    dot.classList.toggle('active', i === index)
-  );
+      dots.forEach((dot, i) =>
+        dot.classList.toggle('active', i === index)
+      );
 
-  // Pause all videos
-  track.querySelectorAll('video').forEach(video => video.pause());
+      // Pause all videos
+      track.querySelectorAll('video').forEach(video => video.pause());
 
-  // Play active video
-  const activeSlide = track.children[index];
-  if (activeSlide.tagName === 'VIDEO') {
-    activeSlide.play();
-  }
-}
-
+      // Play active video if the current slide is a video
+      const activeSlide = track.children[index];
+      if (activeSlide && activeSlide.tagName === 'VIDEO') {
+        activeSlide.play().catch(e => console.log('Autoplay blocked:', e));
+      }
+    }
 
     dots.forEach((dot, i) => {
       dot.addEventListener('click', () => {
@@ -341,18 +343,37 @@
       });
     });
 
+    // Touch / Swipe Logic
     let startX = 0;
 
-    track.addEventListener('touchstart', e => {
+    // Attach listener to the main carousel wrapper for better touch area detection
+    const carouselWrapper = document.getElementById('doorCarousel');
+
+    carouselWrapper.addEventListener('touchstart', e => {
       startX = e.touches[0].clientX;
     });
 
-    track.addEventListener('touchend', e => {
+    carouselWrapper.addEventListener('touchend', e => {
       const endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50 && index < dots.length - 1) index++;
-      if (endX - startX > 50 && index > 0) index--;
-      updateCarousel();
+      const threshold = 50; // swipe sensitivity
+
+      if (startX - endX > threshold) {
+        // Swipe Left (Next)
+        if (index < dots.length - 1) {
+          index++;
+          updateCarousel();
+        }
+      } else if (endX - startX > threshold) {
+        // Swipe Right (Prev)
+        if (index > 0) {
+          index--;
+          updateCarousel();
+        }
+      }
     });
+    
+    // Initialize video state on load
+    updateCarousel();
   </script>
 
 </body>
