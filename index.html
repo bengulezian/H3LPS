@@ -59,7 +59,8 @@
       text-align: center;
       max-width: 650px;
       line-height: 1.6;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      font-weight: 500;
     }
 
     /* ---- SECTION TITLE ---- */
@@ -83,7 +84,7 @@
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
 
@@ -95,6 +96,9 @@
       box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .member-card:hover {
@@ -104,20 +108,26 @@
 
     .member-name {
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 6px;
     }
 
     .member-role {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .member-link {
+      margin-top: auto;
     }
 
     .member-link a {
       color: var(--brand);
       font-weight: 600;
       text-decoration: none;
+      font-size: 0.9rem;
     }
 
     .member-link a:hover {
@@ -139,7 +149,6 @@
       position: relative;
       overflow: hidden;
       border-radius: 12px;
-      /* Ensures the carousel container itself handles touch actions better */
       touch-action: pan-y; 
     }
 
@@ -149,16 +158,14 @@
       width: 100%;
     }
 
-    /* FIX: Added flex properties to prevent squishing/distortion */
     .carousel img,
     .carousel video {
       width: 100%;
-      /* Critical: prevents the flex container from shrinking images to fit one line */
       flex: 0 0 100%; 
       display: block;
       border-radius: 10px;
-      object-fit: cover; /* Ensures images fill space without skewing */
-      max-height: 400px; /* Optional: keeps carousel height consistent */
+      object-fit: cover; 
+      max-height: 400px;
     }
 
     .carousel-dots {
@@ -216,14 +223,15 @@
 
       <div class="description-box">
         <p>
-          A Rhode Island-based tech business aiding caregivers with their everyday struggles.<br><br>
-          Tech for any sort of needs from a skilled team of engineers.
+          A New England-based tech business aiding caregivers with their everyday struggles.
         </p>
       </div>
 
       <div style="margin-bottom:60px; text-align:center;">
         <div class="section-title">What We Offer</div>
-        <div style="font-size:1.1rem; color:var(--text-muted);">Coming Soon</div>
+        <div style="font-size:1.1rem; color:var(--text-main); max-width: 600px; margin: 0 auto; line-height: 1.5;">
+          Tailored low cost tech solutions to aid caregiving businesses for their everyday needs.
+        </div>
       </div>
 
       <div class="team-section">
@@ -231,11 +239,29 @@
 
         <div class="team-grid">
           <div class="member-card">
-            <div class="member-name">Ben Gulezian</div>
+            <div class="member-name">Benjamin Gulezian</div>
             <div class="member-role">Founder</div>
             <div class="member-link">
               <a href="https://www.linkedin.com/in/bengulezian/" target="_blank">LinkedIn</a>
             </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Sky Laurent-Kingsley</div>
+            <div class="member-role">Chief Officer of Operations & Marketing</div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Maxwell Gledow</div>
+            <div class="member-role">Chief Technology Officer</div>
+            <div class="member-link">
+              <a href="https://www.linkedin.com/in/maxwell-gleadow/" target="_blank">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Trevor Gusmini</div>
+            <div class="member-role">Head of Business Management</div>
           </div>
 
           <div class="member-card">
@@ -249,11 +275,28 @@
           </div>
 
           <div class="member-card">
-            <div class="member-name">Maxwell Gleadow</div>
+            <div class="member-name">Denilo Semedo</div>
+            <div class="member-role">Lead Robotics Engineer</div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Shreyans Jadhav</div>
             <div class="member-role">Lead Electrical Engineer</div>
-            <div class="member-link">
-              <a href="https://www.linkedin.com/in/maxwell-gleadow/" target="_blank">LinkedIn</a>
-            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Omar Dovesi</div>
+            <div class="member-role">Lead Machine Learning Engineer</div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Joey Musalli</div>
+            <div class="member-role">Lead Mechanical Engineer</div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-name">Dylan MacIntyre</div>
+            <div class="member-role">Physical Rehabilitation Specialist</div>
           </div>
         </div>
       </div>
@@ -345,8 +388,6 @@
 
     // Touch / Swipe Logic
     let startX = 0;
-
-    // Attach listener to the main carousel wrapper for better touch area detection
     const carouselWrapper = document.getElementById('doorCarousel');
 
     carouselWrapper.addEventListener('touchstart', e => {
@@ -355,7 +396,7 @@
 
     carouselWrapper.addEventListener('touchend', e => {
       const endX = e.changedTouches[0].clientX;
-      const threshold = 50; // swipe sensitivity
+      const threshold = 50; 
 
       if (startX - endX > threshold) {
         // Swipe Left (Next)
@@ -372,7 +413,6 @@
       }
     });
     
-    // Initialize video state on load
     updateCarousel();
   </script>
 
